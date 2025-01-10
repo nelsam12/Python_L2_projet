@@ -88,12 +88,12 @@ def list_operator_numbers(filename = FILE_NAME_OPERATOR):
             if parts[0].lower() == operator_choice.lower():
                 numbers = eval(parts[5])
                 # Simuler des numéros vendus (à remplacer par votre logique réelle)
-                sold_numbers = numbers[:3]  # Pour l'exemple, les 3 premiers sont "vendus"
-                sold_numbers_bool = [n.endswith('v') for n in numbers]
+                sold_numbers = [n[:-1] for n in numbers if n.endswith('v')]
                 # Préparer les données pour tabulate
                 table_data = []
                 row = []
                 for i, num in enumerate(numbers, 1):
+                    num = num[:-1] if num.endswith('v') else num # Enlever le 'v' à la fin du numéro vendu avant de l'afficher
                     # Colorer le numéro en rouge si vendu, vert si disponible
                     formatted_num = colored(num, "black", "on_red" if num in sold_numbers else "on_green")
                     
